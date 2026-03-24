@@ -1,9 +1,10 @@
 # This Makefile is an easy way to run common operations.
 # Execute commands like this:
 # * make
-# * make gcp-push
 # * make run
-# * make docker-build
+# * make docker
+# * make gcp-push
+# * make gcp-remove
 
 # Load the environment variables.
 include .env
@@ -21,8 +22,8 @@ run:
 	@echo Starting local server.
 	go run main.go
 
-.PHONY: docker-build
-docker-build:
+.PHONY: docker
+docker:
 	@echo Building Docker image.
 	docker build -t $(GCP_IMAGE_NAME) .
 
