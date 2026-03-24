@@ -72,6 +72,14 @@ The production image is based on `gcr.io/distroless/static`:
 - Designed specifically for Cloud Run/GKE
 - Slightly larger than scratch but safer (non-root by default, security scanning friendly)
 
+## Why Cloud Build Instead of Building Locally
+
+This template uses Cloud Build to build the Docker image remotely rather than building it on your local machine. This approach has a few advantages:
+
+- **No Docker-in-Docker issues** — if you're already running inside a Docker container (e.g., a dev container or CI environment), you avoid the complexity of nested Docker daemons.
+- **Faster on slow connections** — the build happens in GCP, so you don't need to download base images or layer dependencies to your machine and then re-upload the final image.
+- **Saves local resources** — large builds don't consume your local CPU, memory, or disk.
+
 ## How it works
 
 You'll need to authenticate with Google Cloud first. Ensure your user has sufficient permissions.
