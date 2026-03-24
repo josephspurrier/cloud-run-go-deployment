@@ -1,4 +1,4 @@
-# Google Cloud Deployment Template
+# Google Cloud Run - Deployment Template for Go
 
 The project demonstrates how to package a minimal Go HTTP server that deploys to Google Cloud Run via Docker and Cloud Build.
 
