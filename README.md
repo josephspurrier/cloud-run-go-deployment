@@ -1,4 +1,4 @@
-# deployd
+# Google Cloud Deployment Template
 
 The project demonstrates how to package a minimal Go HTTP server that deploys to Google Cloud Run via Docker and Cloud Build.
 
@@ -48,6 +48,21 @@ Authenticate before running any `make` commands:
 gcloud auth login
 gcloud config set project YOUR_PROJECT_ID
 ```
+
+## PORT Environment Variable
+
+Cloud Run automatically injects a `PORT` environment variable into the container. Your application must listen on this port rather than a hardcoded value. The default is `8080`.
+
+This server reads `PORT` at startup:
+
+```go
+port := os.Getenv("PORT")
+if port == "" {
+    port = "8080"
+}
+```
+
+You can override the default by specifying a custom port when deploying. See the [Cloud Run container port docs](https://docs.cloud.google.com/run/docs/configuring/services/containers#configure-port) for details.
 
 ## How it works
 
