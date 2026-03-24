@@ -31,6 +31,24 @@ The `.env` file is excluded from version control.
 | `make run`                | Run the server locally                    |
 | `make docker`             | Build the Docker image locally            |
 
+## Required GCP Permissions
+
+Your GCP user or service account needs the following IAM roles on the project:
+
+| Role                             | Purpose                                                |
+| -------------------------------- | ------------------------------------------------------ |
+| `roles/cloudbuild.builds.editor` | Submit builds via Cloud Build                          |
+| `roles/storage.admin`            | Push Docker images to Container Registry               |
+| `roles/run.admin`                | Deploy, update, and delete Cloud Run services          |
+| `roles/iam.serviceAccountUser`   | Act as the Cloud Run service account during deployment |
+
+Authenticate before running any `make` commands:
+
+```sh
+gcloud auth login
+gcloud config set project YOUR_PROJECT_ID
+```
+
 ## How it works
 
 You'll need to authenticate with Google Cloud first. Ensure your user has sufficient permissions.
