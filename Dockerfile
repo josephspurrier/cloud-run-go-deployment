@@ -5,16 +5,12 @@ FROM golang:1.25-alpine AS builder
 # Create and change to the app directory.
 WORKDIR /app
 
-# Retrieve application dependencies.
-# This allows the container build to reuse cached dependencies.
-# Expecting to copy go.mod and if present go.sum.
-COPY go.* ./
-RUN go mod download
-
 # Copy local code to the container image.
-COPY . ./
+COPY . .
 
 # Build the binary.
+# This allows the container build to reuse cached dependencies.
+RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o server
 
 # Use the distroless static image for a lean production container.
