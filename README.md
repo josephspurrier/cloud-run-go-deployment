@@ -64,6 +64,14 @@ if port == "" {
 
 You can override the default by specifying a custom port when deploying. See the [Cloud Run container port docs](https://docs.cloud.google.com/run/docs/configuring/services/containers#configure-port) for details.
 
+## Docker Image
+
+The production image is based on `gcr.io/distroless/static`:
+
+- Google-maintained, includes CA certs and timezone data
+- Designed specifically for Cloud Run/GKE
+- Slightly larger than scratch but safer (non-root by default, security scanning friendly)
+
 ## How it works
 
 You'll need to authenticate with Google Cloud first. Ensure your user has sufficient permissions.
